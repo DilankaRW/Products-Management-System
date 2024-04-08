@@ -1,6 +1,7 @@
 package com.example.PMS.controllers;
 
-import com.example.PMS.models.product;
+import com.example.PMS.models.Product;
+import com.example.PMS.models.ProductDto;
 import com.example.PMS.services.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,15 @@ public class ProductsController {
 
     @GetMapping({"", "/"})
     public String showProductList(Model model){
-        List<product> products = repo.findAll();
+        List<Product> products = repo.findAll();
         model.addAttribute("products", products);
         return "products/index";
+    }
+
+    @GetMapping("/create")
+    public String showCreatePage (Model model){
+        ProductDto productDto = new ProductDto();
+        model.addAttribute("productDto", productDto);
+        return "products/CreateProduct";
     }
 }

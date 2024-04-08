@@ -1,34 +1,28 @@
 package com.example.PMS.models;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-
-@Entity
-@Table (name = "products")
-
-public class product {
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class ProductDto {
+    @NotEmpty (message = "The name is required")
     private String name;
+
+    @NotEmpty (message = "The brand is required")
     private String brand;
+
+    @NotEmpty (message = "The category is required")
     private String category;
+
+    @Min(0)
     private double price;
 
-    @Column(columnDefinition = "TEXT")
+    @Size(min = 10, message = "The description should be at least 10 characters")
+    @Size(max = 20, message = "The description should be at least 20 characters")
     private String description;
-    private Date createdAt;
-    private String imageFileName;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private MultipartFile imageFile;
 
     public String getName() {
         return name;
@@ -54,11 +48,11 @@ public class product {
         this.category = category;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -70,19 +64,11 @@ public class product {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public MultipartFile getImageFile() {
+        return imageFile;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getImageFileName() {
-        return imageFileName;
-    }
-
-    public void setImageFileName(String imageFileName) {
-        this.imageFileName = imageFileName;
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }
