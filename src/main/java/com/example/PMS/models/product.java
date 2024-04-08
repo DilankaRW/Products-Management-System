@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-        @Table (name = "products")
+@Table (name = "products")
 
 public class product {
     @Id
@@ -15,7 +15,7 @@ public class product {
     private String name;
     private String brand;
     private String category;
-    private Double price;
+    private double price;
 
     @Column(columnDefinition = "TEXT")
     private String description;
