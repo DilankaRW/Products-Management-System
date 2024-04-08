@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,16 @@
         </tr>
         </thead>
         <tbody>
-            </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="@{${product.price} + '$'}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${product.imageFileName}}" alt="..." width="100">
+            </td>
+            
+        </tr>
         </tbody>
     </table>
 
