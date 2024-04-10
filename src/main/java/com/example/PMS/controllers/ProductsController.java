@@ -3,11 +3,12 @@ package com.example.PMS.controllers;
 import com.example.PMS.models.Product;
 import com.example.PMS.models.ProductDto;
 import com.example.PMS.services.ProductsRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +30,13 @@ public class ProductsController {
         ProductDto productDto = new ProductDto();
         model.addAttribute("productDto", productDto);
         return "products/CreateProduct";
+    }
+
+    @PostMapping("/create")
+    public String createProduct(
+            @Valid @ModelAttribute ProductDto productDto,
+            BindingResult result
+    ){
+        return "redirect:/products";
     }
 }
