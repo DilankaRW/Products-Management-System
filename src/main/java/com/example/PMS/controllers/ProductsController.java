@@ -42,6 +42,10 @@ public class ProductsController {
             result.addError(new FieldError("productDto", "imageFile", "The image file is required"));
         }
 
+        if (result.hasErrors()){
+            return "products/CreateProduct";
+        }
+
         return "redirect:/products";
     }
 }
