@@ -10,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -44,6 +48,16 @@ public class ProductsController {
 
         if (result.hasErrors()){
             return "products/CreateProduct";
+        }
+
+        //Save image file
+        MultipartFile image = productDto.getImageFile();
+        Date createAt = new Date();
+        String storageFileName = createAt.getTime() + "_" + image.getOriginalFilename();
+
+        try {
+            String uploadDir = "public/images/";
+            Path uploadPath = Paths.get(uploadDir);
         }
 
         return "redirect:/products";
