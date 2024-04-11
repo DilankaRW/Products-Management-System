@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 
@@ -67,8 +68,11 @@ public class ProductsController {
             }
 
             try (InputStream inputStream= image.getInputStream()){
-
+                Files.copy(inputStream, Paths.get(uploadDir + storageFileName),
+                        StandardCopyOption.REPLACE_EXISTING);
             }
+        } catch (Exception ex){
+            System.out.println("Exception: " + ex.getMessage());
         }
 
         return "redirect:/products";
