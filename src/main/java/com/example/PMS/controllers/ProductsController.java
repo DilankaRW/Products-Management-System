@@ -75,6 +75,18 @@ public class ProductsController {
             System.out.println("Exception: " + ex.getMessage());
         }
 
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setBrand(productDto.getBrand());
+        product.setCategory(productDto.getCategory());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        product.setCreatedAt(createAt);
+        product.setImageFileName(storageFileName);
+
+        repo.save(product);
+
+
         return "redirect:/products";
     }
 }
