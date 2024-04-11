@@ -12,6 +12,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -58,6 +61,14 @@ public class ProductsController {
         try {
             String uploadDir = "public/images/";
             Path uploadPath = Paths.get(uploadDir);
+
+            if (!Files.exists(uploadPath)){
+                Files.createDirectories(uploadPath);
+            }
+
+            try (InputStream inputStream= image.getInputStream()){
+
+            }
         }
 
         return "redirect:/products";
