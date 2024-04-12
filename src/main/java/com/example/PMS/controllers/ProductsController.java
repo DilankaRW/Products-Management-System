@@ -56,8 +56,8 @@ public class ProductsController {
 
         //Save image file
         MultipartFile image = productDto.getImageFile();
-        Date createAt = new Date();
-        String storageFileName = createAt.getTime() + "_" + image.getOriginalFilename();
+        Date createdAt = new Date();
+        String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
 
         try {
             String uploadDir = "public/images/";
@@ -81,7 +81,7 @@ public class ProductsController {
         product.setCategory(productDto.getCategory());
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
-        product.setCreatedAt(createAt);
+        product.setCreatedAt(createdAt);
         product.setImageFileName(storageFileName);
 
         repo.save(product);
