@@ -89,4 +89,12 @@ public class ProductsController {
 
         return "redirect:/products";
     }
+
+    @GetMapping("/edit")
+    public String showEditPage(
+            Model model,
+            @RequestParam int id
+    ){
+        return "products/EditProduct";
+    }
 }
