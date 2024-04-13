@@ -133,7 +133,19 @@ public class ProductsController {
                 return "products/EditProduct";
             }
 
-            
+            if (!productDto.getImageFile().isEmpty()){
+                // delete old image
+                String uploadDir = "public/images/";
+                Path oldImagePath = Paths.get(uploadDir + product.getImageFileName());
+
+                try {
+                    Files.delete(oldImagePath);
+                }catch (Exception ex){
+                    System.out.println("Exception: " + ex.getMessage());
+                }
+
+
+            }
 
         }catch (Exception ex){
             System.out.println("Exception: " + ex.getMessage());
