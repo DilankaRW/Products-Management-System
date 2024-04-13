@@ -144,7 +144,15 @@ public class ProductsController {
                     System.out.println("Exception: " + ex.getMessage());
                 }
 
+                // save new image file
+                MultipartFile image = productDto.getImageFile();
+                Date createdAt = new Date();
+                String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
 
+                try (InputStream inputStream = image.getInputStream()){
+                    Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
+                }
+                product.setImageFileName(storageFileName);
             }
 
         }catch (Exception ex){
