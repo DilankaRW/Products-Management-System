@@ -117,4 +117,28 @@ public class ProductsController {
 
         return "products/EditProduct";
     }
+
+    @PostMapping("/edit")
+    public String updateProduct(
+            Model model,
+            @RequestParam int id,
+            @Valid @ModelAttribute ProductDto productDto,
+            BindingResult result
+    ){
+        try{
+            Product product = repo.findById(id).get();
+            model.addAttribute("product",product);
+
+            if (result.hasErrors()){
+                return "products/EditProduct";
+            }
+
+            
+
+        }catch (Exception ex){
+            System.out.println("Exception: " + ex.getMessage());
+        }
+
+        return "redirect:/products";
+    }
 }
